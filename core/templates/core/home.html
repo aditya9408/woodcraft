@@ -1,0 +1,244 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}WoodCraft — Handcrafted Carpentry, Valsad{% endblock %}
+
+{% block content %}
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="hero-tag">Est. 2004 · Master Carpentry</span>
+      <h1 class="hero-h1">Crafting Timeless<br><span>Wood Masterpieces</span></h1>
+      <p class="hero-sub">From custom furniture to full interior joinery —<br>built with precision, finished with pride.</p>
+      <div class="hero-btns">
+        <a href="{% url 'projects' %}" class="btn-primary">View Our Work</a>
+        <a href="{% url 'contact' %}" class="btn-outline">Free Consultation</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <i class="ti ti-armchair"></i>
+      <span>Craftsmanship Preview</span>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat"><span class="stat-n">320+</span><span class="stat-l">Projects Done</span></div>
+    <div class="stat"><span class="stat-n">20+ Yrs</span><span class="stat-l">Experience</span></div>
+    <div class="stat"><span class="stat-n">98%</span><span class="stat-l">Happy Clients</span></div>
+    <div class="stat"><span class="stat-n">40+</span><span class="stat-l">Craft Types</span></div>
+  </div>
+</section>
+
+<!-- ── SERVICES ───────────────────────────────────────────────── -->
+<section class="section-light" id="services">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">Our Services</h2>
+        <div class="sec-accent"></div>
+      </div>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-sofa"></i></div>
+        <div class="svc-name">Custom Furniture</div>
+        <div class="svc-desc">Dining tables, wardrobes, and chairs — handcrafted to your exact specifications.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-door"></i></div>
+        <div class="svc-name">Doors & Windows</div>
+        <div class="svc-desc">Solid wood frames, custom carvings, and fitted windows for homes and offices.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-home"></i></div>
+        <div class="svc-name">Interior Joinery</div>
+        <div class="svc-desc">Staircases, panels, and built-ins crafted for safety and stunning interiors.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-stairs"></i></div>
+        <div class="svc-name">Staircases & Railings</div>
+        <div class="svc-desc">Elegant wooden staircases and handrails for every style of home.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-library"></i></div>
+        <div class="svc-name">Built-in Shelving</div>
+        <div class="svc-desc">Custom shelves and wall units designed to fit your space perfectly.</div>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon"><i class="ti ti-bed"></i></div>
+        <div class="svc-name">Bedroom Furniture</div>
+        <div class="svc-desc">Bed frames, wardrobes, and dressing tables built with lasting quality.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURED PROJECTS ─────────────────────────────────────── -->
+<section class="section-white" id="featured-projects">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">Featured Projects</h2>
+        <div class="sec-accent"></div>
+      </div>
+      <a href="{% url 'projects' %}" class="see-all">See all →</a>
+    </div>
+
+    {% if featured_projects %}
+    <div class="projects-grid">
+      {% for project in featured_projects %}
+      <a href="{% url 'project_detail' project.slug %}" class="proj-card">
+        <div class="proj-img-wrap">
+          {% if project.cover_image %}
+            <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" />
+          {% else %}
+            <div class="proj-img-placeholder">
+              <i class="ti ti-armchair"></i>
+            </div>
+          {% endif %}
+        </div>
+        <div class="proj-info">
+          <div class="proj-name">{{ project.title }}</div>
+          {% if project.category %}
+          <span class="proj-tag">{{ project.category.name }}</span>
+          {% endif %}
+          <p class="proj-short-desc">{{ project.short_description }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="empty-state">Projects coming soon — check back shortly!</p>
+    {% endif %}
+  </div>
+</section>
+
+<!-- ── ABOUT SNIPPET ─────────────────────────────────────────── -->
+<section class="section-warm" id="about-snippet">
+  <div class="container">
+    <div class="about-row">
+      <div class="about-visual">
+        <i class="ti ti-user"></i>
+        <span>Master Carpenter</span>
+      </div>
+      <div class="about-content">
+        <h2 class="sec-title">Meet Ravishankar Vishwakarma — The Craftsman</h2>
+        <div class="sec-accent"></div>
+        <p>With over 20+ years of hands-on experience, Ravishankar has built a reputation for turning raw wood into works of art. From small joinery to full home interior builds, every piece carries the signature of his dedication and craft.</p>
+        <div class="values-chips">
+          <span class="val-chip">Quality First</span>
+          <span class="val-chip">Honest Pricing</span>
+          <span class="val-chip">On-Time Delivery</span>
+          <span class="val-chip">Local Timber</span>
+        </div>
+        <a href="{% url 'about' %}" class="btn-primary" style="margin-top:1.25rem;display:inline-block">Learn More About Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────────────── -->
+{% if testimonials %}
+<section class="section-light" id="testimonials">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">What Our Clients Say</h2>
+        <div class="sec-accent"></div>
+      </div>
+    </div>
+    <div class="testi-grid">
+      {% for t in testimonials %}
+      <div class="testi-card">
+        <p class="testi-quote">"{{ t.quote }}"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">{{ t.author_initials }}</div>
+          <div>
+            <div class="testi-name">{{ t.author_name }}</div>
+            <div class="testi-stars">{{ t.stars }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ── CONTACT SECTION ────────────────────────────────────────── -->
+<section class="section-white" id="contact">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">Let's Build Something Together</h2>
+        <div class="sec-accent"></div>
+        <p class="sec-sub">Fill in the form or reach us directly — we'll get back within 24 hours.</p>
+      </div>
+    </div>
+
+    <div class="contact-row">
+      <!-- Form -->
+      <div class="contact-form-wrap">
+        <h3>Send a Message</h3>
+        <form method="post" action="{% url 'home' %}#contact" novalidate>
+          {% csrf_token %}
+          <div class="form-row-two">
+            <div class="form-group">
+              <label>{{ contact_form.first_name.label }}</label>
+              {{ contact_form.first_name }}
+              {% if contact_form.first_name.errors %}<span class="form-error">{{ contact_form.first_name.errors|join:", " }}</span>{% endif %}
+            </div>
+            <div class="form-group">
+              <label>{{ contact_form.last_name.label }}</label>
+              {{ contact_form.last_name }}
+              {% if contact_form.last_name.errors %}<span class="form-error">{{ contact_form.last_name.errors|join:", " }}</span>{% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{ contact_form.phone_number.label }}</label>
+            {{ contact_form.phone_number }}
+            {% if contact_form.phone_number.errors %}<span class="form-error">{{ contact_form.phone_number.errors|join:", " }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            <label>{{ contact_form.subject.label }}</label>
+            {{ contact_form.subject }}
+            {% if contact_form.subject.errors %}<span class="form-error">{{ contact_form.subject.errors|join:", " }}</span>{% endif %}
+          </div>
+          <div class="form-group">
+            <label>{{ contact_form.description.label }}</label>
+            {{ contact_form.description }}
+            {% if contact_form.description.errors %}<span class="form-error">{{ contact_form.description.errors|join:", " }}</span>{% endif %}
+          </div>
+          <button type="submit" class="btn-primary form-btn"><i class="ti ti-send"></i> Send Message</button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info-wrap">
+        <h3>Direct Contact</h3>
+        <div class="ci-list">
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-phone"></i></div>
+            <div><div class="ci-label">Phone</div><div class="ci-val">+91 98765 43210</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-mail"></i></div>
+            <div><div class="ci-label">Email</div><div class="ci-val">vishwakarma@woodcraft.co</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-map-pin"></i></div>
+            <div><div class="ci-label">Workshop</div><div class="ci-val">Valsad, Gujarat, India</div></div>
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <i class="ti ti-map"></i>
+          <span>View on Google Maps</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

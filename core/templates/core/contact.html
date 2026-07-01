@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Contact Us — WoodCraft{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <span class="breadcrumb"><a href="{% url 'home' %}">Home</a> / Contact</span>
+    <h1>Let's Build Something Together</h1>
+    <p>Fill in the form or reach us directly — we'll get back within 24 hours.</p>
+  </div>
+</div>
+
+<section class="section-white">
+  <div class="container">
+    <div class="contact-row">
+
+      <!-- Form -->
+      <div class="contact-form-wrap">
+        <h2>Send a Message</h2>
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="form-row-two">
+            <div class="form-group">
+              <label for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+              {{ form.first_name }}
+              {% if form.first_name.errors %}<span class="form-error">{{ form.first_name.errors|join:", " }}</span>{% endif %}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+              {{ form.last_name }}
+              {% if form.last_name.errors %}<span class="form-error">{{ form.last_name.errors|join:", " }}</span>{% endif %}
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label }}</label>
+            {{ form.phone_number }}
+            {% if form.phone_number.errors %}<span class="form-error">{{ form.phone_number.errors|join:", " }}</span>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}</label>
+            {{ form.subject }}
+            {% if form.subject.errors %}<span class="form-error">{{ form.subject.errors|join:", " }}</span>{% endif %}
+          </div>
+
+          <div class="form-group">
+            <label for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            {{ form.description }}
+            {% if form.description.errors %}<span class="form-error">{{ form.description.errors|join:", " }}</span>{% endif %}
+          </div>
+
+          <button type="submit" class="btn-primary form-btn">
+            <i class="ti ti-send"></i> Send Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="contact-info-wrap">
+        <h2>Direct Contact</h2>
+        <div class="ci-list">
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-phone"></i></div>
+            <div><div class="ci-label">Phone</div><div class="ci-val">+91 98765 43210</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-mail"></i></div>
+            <div><div class="ci-label">Email</div><div class="ci-val">vishwakarma@woodcraft.co</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-map-pin"></i></div>
+            <div><div class="ci-label">Workshop</div><div class="ci-val">Valsad, Gujarat, India</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-clock"></i></div>
+            <div><div class="ci-label">Hours</div><div class="ci-val">Mon–Sat: 9 AM – 7 PM</div></div>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <i class="ti ti-map"></i>
+          <span>View on Google Maps</span>
+        </div>
+
+        <div class="social-links" style="margin-top:1.5rem">
+          <a href="#" class="soc-icon"><i class="ti ti-brand-whatsapp"></i> WhatsApp Us</a>
+          <a href="#" class="soc-icon"><i class="ti ti-brand-instagram"></i> Instagram</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

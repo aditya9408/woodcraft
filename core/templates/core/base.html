@@ -1,0 +1,107 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}WoodCraft — Handcrafted Carpentry{% endblock %}</title>
+  <meta name="description" content="{% block meta_desc %}WoodCraft by Ravishankar Vishwakarma — Custom furniture, doors, staircases and interior joinery in Valsad, Gujarat.{% endblock %}">
+
+  <!-- Tabler Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'core/css/style.css' %}" />
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────────────────────────────── -->
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="{% url 'home' %}" class="nav-logo">
+      <i class="ti ti-tools"></i>
+      <span>WoodCraft</span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <i class="ti ti-menu-2"></i>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="{% url 'home' %}" class="nav-link {% if active_page == 'home' %}active{% endif %}">Home</a></li>
+      <li><a href="{% url 'projects' %}" class="nav-link {% if active_page == 'projects' %}active{% endif %}">Projects</a></li>
+      <li><a href="{% url 'about' %}" class="nav-link {% if active_page == 'about' %}active{% endif %}">About</a></li>
+      <li><a href="{% url 'contact' %}" class="nav-link {% if active_page == 'contact' %}active{% endif %}">Contact</a></li>
+    </ul>
+
+    <a href="{% url 'contact' %}" class="nav-cta">Get a Quote</a>
+  </div>
+</nav>
+
+<!-- ── FLASH MESSAGES ─────────────────────────────────────────── -->
+{% if messages %}
+<div class="messages-wrapper">
+  {% for message in messages %}
+  <div class="flash-message flash-{{ message.tags }}">
+    <i class="ti ti-circle-check"></i>
+    {{ message }}
+    <button class="flash-close" onclick="this.parentElement.remove()"><i class="ti ti-x"></i></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- ── PAGE CONTENT ───────────────────────────────────────────── -->
+{% block content %}{% endblock %}
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-logo">
+          <i class="ti ti-tools"></i>
+          <span>WoodCraft</span>
+        </div>
+        <p class="footer-tagline">Handcrafted with heart, built to last.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="ti ti-brand-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="ti ti-brand-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="ti ti-brand-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-nav-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'projects' %}">Projects</a></li>
+          <li><a href="{% url 'about' %}">About Us</a></li>
+          <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-contact-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><i class="ti ti-phone"></i> +91 98765 43210</li>
+          <li><i class="ti ti-mail"></i> vishwakarma@woodcraft.co</li>
+          <li><i class="ti ti-map-pin"></i> Valsad, Gujarat, India</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 WoodCraft by Ravishankar Vishwakarma · Valsad, Gujarat</span>
+      <span>Crafted with <i class="ti ti-heart-filled" style="color:#D4A96A"></i> and fine wood</span>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'core/js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

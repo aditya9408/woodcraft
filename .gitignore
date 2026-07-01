@@ -1,0 +1,58 @@
+# ── PYTHON ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── VIRTUAL ENVIRONMENT ─────────────────────────────────────────
+venv/
+env/
+.venv/
+ENV/
+
+# ── DJANGO ──────────────────────────────────────────────────────
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Static files collected by collectstatic
+staticfiles/
+
+# User uploaded media files
+media/
+
+# ── ENVIRONMENT VARIABLES ───────────────────────────────────────
+.env
+.env.local
+.env.production
+*.env
+
+# ── DATABASE ────────────────────────────────────────────────────
+*.sql
+*.dump
+
+# ── WINDOWS ─────────────────────────────────────────────────────
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ── VS CODE ─────────────────────────────────────────────────────
+.vscode/
+*.code-workspace
+
+# ── PYCHARM / JETBRAINS ─────────────────────────────────────────
+.idea/
+*.iml
+
+# ── MISC ────────────────────────────────────────────────────────
+*.DS_Store
+*.bak
+*.swp
+*.tmp
+dist/
+build/
+*.egg-info/

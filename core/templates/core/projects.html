@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Projects — WoodCraft{% endblock %}
+
+{% block content %}
+
+<div class="page-header">
+  <div class="container">
+    <span class="breadcrumb"><a href="{% url 'home' %}">Home</a> / Projects</span>
+    <h1>Our Completed Work</h1>
+    <p>Browse through our portfolio — click any project to learn more.</p>
+  </div>
+</div>
+
+<!-- ── FILTER BAR ─────────────────────────────────────────────── -->
+<section class="section-white">
+  <div class="container">
+    <div class="filter-bar">
+      <a href="{% url 'projects' %}" class="filter-btn {% if not active_category %}active{% endif %}">All</a>
+      {% for cat in categories %}
+      <a href="{% url 'projects' %}?category={{ cat.slug }}" class="filter-btn {% if active_category == cat.slug %}active{% endif %}">
+        {{ cat.name }}
+      </a>
+      {% endfor %}
+    </div>
+
+    {% if projects %}
+    <div class="projects-grid projects-grid--large">
+      {% for project in projects %}
+      <a href="{% url 'project_detail' project.slug %}" class="proj-card">
+        <div class="proj-img-wrap">
+          {% if project.cover_image %}
+            <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" />
+          {% else %}
+            <div class="proj-img-placeholder">
+              <i class="ti ti-armchair"></i>
+            </div>
+          {% endif %}
+        </div>
+        <div class="proj-info">
+          <div class="proj-name">{{ project.title }}</div>
+          {% if project.category %}
+          <span class="proj-tag">{{ project.category.name }}</span>
+          {% endif %}
+          <p class="proj-short-desc">{{ project.short_description }}</p>
+          <span class="proj-cta">View Project →</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <i class="ti ti-mood-empty"></i>
+      <p>No projects found in this category yet.</p>
+      <a href="{% url 'projects' %}" class="btn-outline">View All Projects</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}About Us — WoodCraft{% endblock %}
+
+{% block content %}
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<section class="about-hero">
+  <div class="container">
+    <span class="breadcrumb"><a href="{% url 'home' %}">Home</a> / About</span>
+    <div class="about-hero-row">
+      <div class="about-visual">
+        <i class="ti ti-user"></i>
+        <span>Master Carpenter</span>
+      </div>
+      <div class="about-content">
+        <h1>Meet Ravishankar — The Craftsman</h1>
+        <div class="sec-accent"></div>
+        <p>With over 20+ years of hands-on experience, Ravishankar has built a reputation for turning raw wood into works of art. From small joinery to full home interior builds, every piece carries the signature of his dedication and craft.</p>
+        <p>What started as a humble workshop in Valsad has grown into a trusted name for discerning homeowners and builders who refuse to settle for anything less than excellence.</p>
+        <div class="values-chips">
+          <span class="val-chip">Quality First</span>
+          <span class="val-chip">Honest Pricing</span>
+          <span class="val-chip">On-Time Delivery</span>
+          <span class="val-chip">Local Timber</span>
+          <span class="val-chip">Sustainable Wood</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ─────────────────────────────────────────────────── -->
+<div class="stats-bar stats-bar--light">
+  <div class="stat"><span class="stat-n">320+</span><span class="stat-l">Projects Done</span></div>
+  <div class="stat"><span class="stat-n">20+ Yrs</span><span class="stat-l">Experience</span></div>
+  <div class="stat"><span class="stat-n">98%</span><span class="stat-l">Happy Clients</span></div>
+  <div class="stat"><span class="stat-n">40+</span><span class="stat-l">Craft Types</span></div>
+</div>
+
+<!-- ── LOCATION ───────────────────────────────────────────────── -->
+<section class="section-light">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">Our Workshop</h2>
+        <div class="sec-accent"></div>
+      </div>
+    </div>
+    <div class="location-row">
+      <div class="location-info">
+        <div class="ci-list">
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-map-pin"></i></div>
+            <div><div class="ci-label">Address</div><div class="ci-val">Valsad, Gujarat, India — 395001</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-phone"></i></div>
+            <div><div class="ci-label">Phone</div><div class="ci-val">+91 98765 43210</div></div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-icon"><i class="ti ti-clock"></i></div>
+            <div><div class="ci-label">Workshop Hours</div><div class="ci-val">Mon–Sat: 9:00 AM – 7:00 PM</div></div>
+          </div>
+        </div>
+        <a href="{% url 'contact' %}" class="btn-primary" style="margin-top:1.5rem;display:inline-block">Get Directions / Contact Us</a>
+      </div>
+      <div class="map-placeholder map-placeholder--large">
+        <i class="ti ti-map"></i>
+        <span>Valsad, Gujarat, India</span>
+        <small>View on Google Maps</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ───────────────────────────────────────────── -->
+{% if testimonials %}
+<section class="section-white">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <h2 class="sec-title">What Our Clients Say</h2>
+        <div class="sec-accent"></div>
+      </div>
+    </div>
+    <div class="testi-grid">
+      {% for t in testimonials %}
+      <div class="testi-card">
+        <p class="testi-quote">"{{ t.quote }}"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">{{ t.author_initials }}</div>
+          <div>
+            <div class="testi-name">{{ t.author_name }}</div>
+            <div class="testi-stars">{{ t.stars }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
