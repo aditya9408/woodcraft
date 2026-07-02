@@ -101,6 +101,12 @@ DATABASES = {
 }
 
 
+CSRF_TRUSTED_ORIGINS = [
+    f'https://{host}' 
+    for host in os.getenv('ALLOWED_HOSTS', '').split(',') 
+    if host and host != 'healthcheck.railway.app'
+]
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
