@@ -89,22 +89,23 @@ def contact(request):
 
 
 # ── helpers ────────────────────────────────────────────────────────────────────
-
 def _send_contact_notification(msg):
-    """Email the admin when a new contact message arrives."""
-    subject = f'[WoodCraft] New message from {msg.full_name}: {msg.subject}'
-    body = (
-        f'New contact message received on WoodCraft website.\n\n'
-        f'Name:    {msg.full_name}\n'
-        f'Phone:   {msg.phone_number}\n'
-        f'Subject: {msg.subject}\n\n'
-        f'Message:\n{msg.description}\n\n'
-        f'---\nTo reply or manage: /admin/core/contactmessage/{msg.pk}/change/'
-    )
-    send_mail(
-        subject=subject,
-        message=body,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=[settings.CONTACT_RECIPIENT_EMAIL],
-        fail_silently=True,
-    )
+    try:
+        subject = f'[WoodCraft] New message from {msg.full_name}: {msg.subject}'
+        body = (
+            f'New contact message received on WoodCraft website.\n\n'
+            f'Name:    {msg.full_name}\n'
+            f'Phone:   {msg.phone_number}\n'
+            f'Subject: {msg.subject}\n\n'
+            f'Message:\n{msg.description}\n\n'
+            f'---\nTo reply or manage: /admin/core/contactmessage/{msg.pk}/change/'
+        )
+        send_mail(
+            subject=subject,
+            message=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[settings.CONTACT_RECIPIENT_EMAIL],
+            fail_silently=True,
+        )
+    except Exception:
+        pass
