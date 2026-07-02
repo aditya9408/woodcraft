@@ -1,5 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
+from PIL import Image as PILImage
+import io
+from django.core.files.base import ContentFile
 
 
 class ProjectCategory(models.Model):
@@ -44,7 +47,28 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    def compress_image(self, image_field):
+        img = PILImage.open(image_field)
+        img = img.convert('RGB')
+        # Resize if larger than 1200px wide
+        if img.width > 1200:
+            ratio = 1200 / img.width
+            new_height = int(img.height * ratio)
+            img = img.resize((1200, new_height), PILImage.LANCZOS)
+        output = io.BytesIO()
+        img.save(output, format='JPEG', quality=75, optimize=True)
+        output.seek(0)
+        return ContentFile(output.read(), name=image_field.name)
+
     def save(self, *args, **kwargs):
+        # Auto-compress cover image
+        if self.cover_image and hasattr(self.cover_image, 'file'):
+            try:
+                self.cover_image = self.compress_image(self.cover_image)
+            except Exception:
+                pass
+
+        # Auto-generate slug
         if not self.slug:
             base_slug = slugify(self.title)
             slug = base_slug
@@ -53,6 +77,7 @@ class Project(models.Model):
                 slug = f'{base_slug}-{counter}'
                 counter += 1
             self.slug = slug
+
         super().save(*args, **kwargs)
 
 
@@ -67,6 +92,24 @@ class ProjectImage(models.Model):
 
     def __str__(self):
         return f'{self.project.title} — image {self.order}'
+
+    def save(self, *args, **kwargs):
+        # Auto-compress gallery images
+        if self.image and hasattr(self.image, 'file'):
+            try:
+                img = PILImage.open(self.image)
+                img = img.convert('RGB')
+                if img.width > 1200:
+                    ratio = 1200 / img.width
+                    new_height = int(img.height * ratio)
+                    img = img.resize((1200, new_height), PILImage.LANCZOS)
+                output = io.BytesIO()
+                img.save(output, format='JPEG', quality=75, optimize=True)
+                output.seek(0)
+                self.image = ContentFile(output.read(), name=self.image.name)
+            except Exception:
+                pass
+        super().save(*args, **kwargs)
 
 
 class Testimonial(models.Model):
