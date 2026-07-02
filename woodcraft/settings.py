@@ -99,6 +99,9 @@ STORAGES = {
     },
 }
 
+# Keep this for django-cloudinary-storage compatibility
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
