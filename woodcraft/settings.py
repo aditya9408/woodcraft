@@ -89,14 +89,14 @@ STORAGES = {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
     },
 }
 
 # Required for django-cloudinary-storage compatibility with Django 6
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
-# Prevent WhiteNoise strict manifest errors with Django admin static files
+# Prevent strict manifest errors from Django admin static files
 WHITENOISE_MANIFEST_STRICT = False
 
 # ── CLOUDINARY ─────────────────────────────────────────────────
